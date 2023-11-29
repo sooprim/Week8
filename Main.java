@@ -7,33 +7,27 @@ import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.io.Serializable;
 
-class Student implements Serializable{
+class Student implements Serializable {
 	String name;
 	String phoneNum;
 	int indexNum;
 	transient int recordNum;
 
-	public Student() {
-
-	}
-
-	public Student(String name, String phoneNum, int indexNum, int recordNum) {
+	public Student() {}
+	public Student(String name, String phoneNum, int indexNum, int recordNum)
+	{
 		this.name = name;
 		this.phoneNum = phoneNum;
 		this.indexNum = indexNum;
 		this.recordNum = recordNum;
 	}
-
 }
 
 class StudentFileStream {
-	public StudentFileStream() {
-
-	}
+	public StudentFileStream() {}
 
 	public void writeToFile(Student student, String fileName) {
 		try {
-
 			FileOutputStream file = new FileOutputStream(fileName);
 			ObjectOutputStream out = new ObjectOutputStream(file);
 
@@ -44,8 +38,10 @@ class StudentFileStream {
 
 			System.out.println("Object has been serialized\n" + "Data before Deserialization.");
 			printData(student);
-
-		} catch (IOException ex) {
+			
+		} 
+		
+		catch (IOException ex) {
 			System.out.println("IOException is caught");
 		}
 	}
@@ -53,7 +49,6 @@ class StudentFileStream {
 	public Student readFromFile(String fileName) {
 		Student student = new Student();
 		try {
-
 			FileInputStream file = new FileInputStream(fileName);
 			ObjectInputStream in = new ObjectInputStream(file);
 
@@ -63,15 +58,18 @@ class StudentFileStream {
 			file.close();
 			System.out.println("Object has been deserialized\n" + "Data after Deserialization.");
 			printData(student);
-
-		} catch (IOException ex) {
+		} 
+		
+		catch (IOException ex) {
 			System.out.println("IOException is caught");
-		} catch (ClassNotFoundException ex) {
+		} 
+		
+		catch (ClassNotFoundException ex) {
 			System.out.println("ClassNotFoundException" + " is caught");
 		}
+		
 		return student;
 	}
-
 	public void printData(Student student) {
 		System.out.println("Name = " + student.name);
 		System.out.println("Index number = " + student.indexNum);
